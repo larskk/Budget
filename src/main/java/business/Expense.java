@@ -9,14 +9,6 @@ public class Expense implements Serializable {
   private double amount;
   private String frequency;
 
-  public String getFrequency() {
-    return frequency;
-  }
-
-  public void setFrequency(String frequency) {
-    this.frequency = frequency;
-  }
-
   public Expense(String expenseName, String freq, double yearlyAmount) {
     this.name = expenseName;
     this.amount = yearlyAmount;
@@ -27,6 +19,14 @@ public class Expense implements Serializable {
     this.name = "";
     this.amount = 0.0;
     this.frequency = "0";
+  }
+
+  public String getFrequency() {
+    return frequency;
+  }
+
+  public void setFrequency(String frequency) {
+    this.frequency = frequency;
   }
 
   public String getName() {
@@ -49,8 +49,52 @@ public class Expense implements Serializable {
     return this.getAmount() / 12;
   }
 
+  public double getTotalSaving (int month) {
+    int lastMonth = this.getLastPaymentMonth(month);
+    int numberOfMonths;
+    if (lastMonth <= month) {
+      numberOfMonths = month - lastMonth;
+    } else {
+      numberOfMonths = month + (12-lastMonth);
+    }
+    return numberOfMonths * this.getMonthlySaving();
+  }
+
+  private int getLastPaymentMonth(int month) {
+    //case 1: foregående betaling er samme år
+    for (int i = month; i >= 1; i--) {
+      if (this.isPaymentMonth(i)) {
+        return i;
+      }
+    }
+    //case 2: foregående betaling er året før
+    for (int i = 12; i >= month+1; i--) {
+      if (this.isPaymentMonth(i)) {
+        return i;
+      }
+    }
+    return 0;
+  }
+
+  private boolean isPaymentMonth(int month) {
+    int[] months = this.getPaymentMonths();
+    for (int value : months) {
+      if (value == month) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public int[] getPaymentMonths() {
+    String[] months = this.getFrequency().split("-");
+    return MyUtil.stringToIntegerArray(months);
+  }
+
   public static void main(String[] args) {
-    Expense exp = new Expense("Benzin", "1-3", 1500.0);
-    System.out.println(exp.getName());
+    System.out.println("TEST");
+    Expense e = new Expense("Benzin", "2-8", 3000.0);
+    System.out.println(e.getTotalSaving(1));
   }
 }
+
