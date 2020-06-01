@@ -19,7 +19,7 @@ public class Expense implements Serializable {
 
   public Expense(String expenseName, String freq, double yearlyAmount) {
     this.name = expenseName;
-    this.amount = amount;
+    this.amount = yearlyAmount;
     this.frequency = freq;
   }
 
