@@ -13,9 +13,10 @@
   <thead>
   <tr>
     <th>Navn</th>
-    <th>Frekvens</th>
-    <th>Beløb</th>
-    <th>Test</th>
+    <th>Pr. måned</th>
+    <c:forEach items="${months}" var="monthName" varStatus="status">
+      <th>${monthName}: ${status.count}</th>
+    </c:forEach>
   </tr>
   </thead>
 
@@ -23,9 +24,11 @@
   <c:forEach var="expense" items="${expenses}">
     <tr>
       <td>${expense.name}</td>
-      <td>${expense.frequency}</td>
-      <td>${expense.amount}</td>
-      <td>${expense.getFrequency()}</td>
+      <td>${expense.getMonthlySaving()}</td>
+      <c:forEach begin="1" end="12" varStatus="loop">
+        <c:set var="monthNumber" value="${loop.index}" />
+        <td>${expense.getTotalSaving(monthNumber)}</td>
+      </c:forEach>
     </tr>
   </c:forEach>
   </tbody>

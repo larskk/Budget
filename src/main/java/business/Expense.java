@@ -3,6 +3,7 @@ package business;
 import misc.MyUtil;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 
 public class Expense implements Serializable {
   private String name;
@@ -49,15 +50,17 @@ public class Expense implements Serializable {
     return this.getAmount() / 12;
   }
 
-  public double getTotalSaving (int month) {
+  public String getTotalSaving(int month) {
+    double amount;
+    NumberFormat currency = NumberFormat.getCurrencyInstance();
     int lastMonth = this.getLastPaymentMonth(month);
     int numberOfMonths;
     if (lastMonth <= month) {
       numberOfMonths = month - lastMonth;
     } else {
-      numberOfMonths = month + (12-lastMonth);
+      numberOfMonths = month + (12 - lastMonth);
     }
-    return numberOfMonths * this.getMonthlySaving();
+    return currency.format(numberOfMonths * this.getMonthlySaving());
   }
 
   private int getLastPaymentMonth(int month) {
