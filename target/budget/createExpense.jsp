@@ -18,7 +18,7 @@
       <input type="hidden" name="action" value="create">
       <label for="name">Navn</label>
       <input autofocus id="name" name="name" required>
-      <label for="amount">Beløb</label>
+      <label for="amount">Årligt beløb</label>
       <input id="amount" name="amount" required type="number">
       <p>
         <label>Make a choice:</label>

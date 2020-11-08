@@ -8,16 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.Month;
 import java.util.List;
 
 import static data.ExpenseManager.createExpense;
-import static data.ExpenseManager.getExpenses;
 
 @WebServlet("/MinServlet")
 public class MinServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+    request.setCharacterEncoding("UTF-8");
     HttpSession s = request.getSession();
     String url = "/showExpenses.jsp";
     String[] months = {"januar", "februar", "marts", "april", "maj", "juni", "juli", "august", "september", "oktober", "november", "december"};
@@ -58,6 +57,7 @@ public class MinServlet extends HttpServlet {
     expense.setName(expenseName);
     expense.setFrequency(frequency);
     expense.setAmount(amount);
+    System.out.println(expense.getName());
     createExpense(expense);
     return "showExpenses.jsp";
   }

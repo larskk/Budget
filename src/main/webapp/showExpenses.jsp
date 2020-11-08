@@ -9,25 +9,27 @@
 </head>
 <body>
 <h1>Budget</h1>
+<p>Nedenfor vises akkumuleret aconto pr. måned for dine variable udgifter. I betalingsmånederne vil det være 0 kr.</p>
 <table>
   <thead>
   <tr>
     <th>Navn</th>
-    <th>Pr. måned</th>
+    <th class="right">Pr. måned</th>
     <c:forEach items="${months}" var="monthName" varStatus="status">
-      <th>${monthName}: ${status.count}</th>
+      <th class="right">${monthName}</th>
     </c:forEach>
   </tr>
   </thead>
 
   <tbody>
+
   <c:forEach var="expense" items="${expenses}">
     <tr>
       <td>${expense.name}</td>
-      <td>${expense.getMonthlySaving()}</td>
+      <td class="right">${expense.getMonthlySaving()}</td>
       <c:forEach begin="1" end="12" varStatus="loop">
         <c:set var="monthNumber" value="${loop.index}"/>
-        <td>${expense.getTotalSaving(monthNumber)}</td>
+        <td class="right">${expense.getTotalSaving(monthNumber)}</td>
       </c:forEach>
     </tr>
   </c:forEach>

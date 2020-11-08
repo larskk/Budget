@@ -9,7 +9,10 @@ public class DBUtil {
   private static final String USERNAME = "root";
   private static final String PASSWORD = "sesame";
   //    private static final String URL = "jdbc:mysql://localhost/healthCare";
-  private static final String URL = "jdbc:mysql://localhost/budget?serverTimezone=UTC&noAccessToProcedureBodies=true&useSSL=false";
+  private static final String URL = "jdbc:mysql://localhost/budget?" +
+    "serverTimezone=UTC" + "&" +
+    "noAccessToProcedureBodies=true" + "&" +
+    "useSSL=false";
 
   public static Connection getConnection() {
     Connection conn = null;

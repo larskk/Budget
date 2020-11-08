@@ -29,6 +29,7 @@ h2 {
   color: teal;
   margin-bottom: .5em;
 }
+
 label {
   font-weight: bold;
   display: block;
@@ -64,6 +65,14 @@ th, td {
   text-align: left;
   padding: .5em;
 }
+th {
+  background-color: darkred;
+  color: antiquewhite;
+}
+tr:nth-child(even) {
+  background-color: lightsalmon;
+}
+
 .right {
   text-align: right;
 }

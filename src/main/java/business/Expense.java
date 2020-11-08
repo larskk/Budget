@@ -4,6 +4,7 @@ import misc.MyUtil;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Expense implements Serializable {
   private String name;
@@ -46,13 +47,18 @@ public class Expense implements Serializable {
     this.amount = amount;
   }
 
-  public double getMonthlySaving() {
-    return this.getAmount() / 12;
+  public String getMonthlySaving() {
+    NumberFormat formatter = NumberFormat.getNumberInstance(Locale.getDefault());
+    formatter.setMaximumFractionDigits(2);
+    formatter.setMinimumFractionDigits(2);
+    return formatter.format(this.getAmount() / 12);
   }
 
   public String getTotalSaving(int month) {
     double amount;
-    NumberFormat currency = NumberFormat.getCurrencyInstance();
+    NumberFormat formatter = NumberFormat.getNumberInstance(Locale.getDefault());
+    formatter.setMaximumFractionDigits(2);
+    formatter.setMinimumFractionDigits(2);
     int lastMonth = this.getLastPaymentMonth(month);
     int numberOfMonths;
     if (lastMonth <= month) {
@@ -60,7 +66,7 @@ public class Expense implements Serializable {
     } else {
       numberOfMonths = month + (12 - lastMonth);
     }
-    return currency.format(numberOfMonths * this.getMonthlySaving());
+    return formatter.format(numberOfMonths * (this.getAmount() / 12));
   }
 
   private int getLastPaymentMonth(int month) {
@@ -94,10 +100,10 @@ public class Expense implements Serializable {
     return MyUtil.stringToIntegerArray(months);
   }
 
-  public static void main(String[] args) {
+/*  public static void main(String[] args) {
     System.out.println("TEST");
     Expense e = new Expense("Benzin", "2-8", 3000.0);
     System.out.println(e.getTotalSaving(1));
-  }
+  }*/
 }
 
