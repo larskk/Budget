@@ -1,3 +1,3 @@
 # Budget
 Webapplikation til personlig budgetstyring.
-Afsluttende projekt på aAademiuddannelsen i Informationsteknologi.
+Afsluttende projekt på Aademiuddannelsen i Informationsteknologi.
